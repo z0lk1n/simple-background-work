@@ -9,7 +9,7 @@ class SimpleJobIntentService : JobIntentService() {
 
   override fun onCreate() {
     super.onCreate()
-    Log.i(TAG, "SimpleJobIntentService creating")
+    Log.i(TAG, "SimpleJobIntentService create")
   }
 
   override fun onHandleWork(intent: Intent) {
@@ -19,7 +19,7 @@ class SimpleJobIntentService : JobIntentService() {
 
   override fun onDestroy() {
     super.onDestroy()
-    Log.i(TAG, "SimpleJobIntentService done")
+    Log.i(TAG, "SimpleJobIntentService destroy")
   }
 
   companion object {

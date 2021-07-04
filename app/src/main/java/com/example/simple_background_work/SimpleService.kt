@@ -2,7 +2,9 @@ package com.example.simple_background_work
 
 import android.app.Service
 import android.content.Intent
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.util.Log
 
 private const val TAG: String = "SimpleService"
@@ -10,11 +12,11 @@ private const val TAG: String = "SimpleService"
 class SimpleService : Service() {
 
   override fun onCreate() {
-    Log.i(TAG, "SimpleService creating")
+    Log.i(TAG, "SimpleService create")
   }
 
   override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-    Log.i(TAG, "SimpleService starting")
+    Log.i(TAG, "SimpleService start")
 
     doWork()
 
@@ -23,8 +25,12 @@ class SimpleService : Service() {
   }
 
   private fun doWork() {
-    Log.i(TAG, "SimpleService do work")
-    stopSelf()
+    Log.i(TAG, "SimpleService do work start")
+
+    Handler(Looper.getMainLooper()).postDelayed({
+      Log.i(TAG, "SimpleService do work end")
+      stopSelf()
+    }, 10000)
   }
 
   override fun onBind(intent: Intent): IBinder? {
@@ -33,6 +39,6 @@ class SimpleService : Service() {
   }
 
   override fun onDestroy() {
-    Log.i(TAG, "SimpleService done")
+    Log.i(TAG, "SimpleService destroy")
   }
 }

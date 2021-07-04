@@ -7,7 +7,9 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import android.util.Log
 
 private const val TAG: String = "SimpleForegroundService"
@@ -18,12 +20,12 @@ private const val START_FOREGROUND_ID: Int = 1
 class SimpleForegroundService : Service() {
 
   override fun onCreate() {
-    Log.i(TAG, "SimpleForegroundService creating")
+    Log.i(TAG, "SimpleForegroundService create")
     startForeground()
   }
 
   override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-    Log.i(TAG, "SimpleForegroundService starting")
+    Log.i(TAG, "SimpleForegroundService start")
 
     doWork()
 
@@ -49,15 +51,12 @@ class SimpleForegroundService : Service() {
   }
 
   private fun doWork() {
-    Log.i(TAG, "SimpleForegroundService do work")
+    Log.i(TAG, "SimpleForegroundService do work start")
 
-    try {
-      Thread.sleep(10000)
-    } catch (e: InterruptedException) {
-      Thread.currentThread().interrupt()
-    }
-
-    stopService()
+    Handler(Looper.getMainLooper()).postDelayed({
+      Log.i(TAG, "SimpleForegroundService do work end")
+      stopService()
+    }, 10000)
   }
 
   private fun stopService() {
@@ -71,6 +70,6 @@ class SimpleForegroundService : Service() {
   override fun onBind(intent: Intent?): IBinder? = null
 
   override fun onDestroy() {
-    Log.i(TAG, "SimpleForegroundService done")
+    Log.i(TAG, "SimpleForegroundService destroy")
   }
 }

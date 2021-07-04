@@ -11,7 +11,7 @@ class SimpleIntentService : IntentService(SimpleIntentService::class.java.simple
 
   override fun onCreate() {
     super.onCreate()
-    Log.i(TAG, "SimpleIntentService creating")
+    Log.i(TAG, "SimpleIntentService create")
   }
 
   override fun onHandleIntent(intent: Intent?) {
@@ -21,6 +21,6 @@ class SimpleIntentService : IntentService(SimpleIntentService::class.java.simple
 
   override fun onDestroy() {
     super.onDestroy()
-    Log.i(TAG, "SimpleIntentService done")
+    Log.i(TAG, "SimpleIntentService destroy")
   }
 }
