@@ -1,0 +1,2 @@
+rootProject.name = "simple-background-work"
+include ':app'
